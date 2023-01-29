@@ -15,3 +15,13 @@ function makeButtons(cityName) {
 
   $(".history").append(newButton);
 }
+
+// clearing local storage and deleting history buttons with clear button //
+for (var i = 0; i < historyArray.length; i++) {
+  makeButtons(historyArray[i]);
+}
+
+$("#btn-clear").on("click", function () {
+  $(".history").empty();
+  localStorage.clear();
+});
