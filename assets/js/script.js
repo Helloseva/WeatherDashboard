@@ -7,7 +7,7 @@ var cityName = document.querySelector("#city-name");
 var windIndex = document.querySelector("#windIndex");
 var historyArray = JSON.parse(localStorage.getItem("history")) || [];
 
-// searching ciyty with history button //
+// searching city with history button //
 function makeButtons(cityName) {
   var newButton = document.createElement("button");
   newButton.textContent = cityName;
