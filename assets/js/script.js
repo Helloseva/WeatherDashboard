@@ -33,7 +33,7 @@ searchBtn.onclick = function getCity() {
   windIndex.className = "show";
   // creates the value for city to use in api url //
   city = document.getElementById("search-city").value.trim();
-  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
   // using moment to show current date in top column and next 5 dates in each forecast card //
   document.getElementById("city-date").innerHTML = moment().format("L");
   makeButtons(city);
@@ -50,9 +50,9 @@ searchBtn.onclick = function getCity() {
      // inserts current weather info into html for top column //
      document.getElementById("city-name").innerHTML = weather.name;
      document.getElementById("temp").innerHTML =
-       "Temperature: " + weather.main.temp;
+       "Temperature: " + weather.main.temp + " °C";
      document.getElementById("humidity").innerHTML =
-       "Humidity: " + weather.main.humidity;
+       "Humidity: " + weather.main.humidity + "%" ;
      document.getElementById("wind").innerHTML =
        "Wind Speed: " + weather.wind.speed;
      $("#icon1").empty();
@@ -68,7 +68,7 @@ searchBtn.onclick = function getCity() {
      // api url for UV index //
      var queryURL2 = `http://api.openweathermap.org/data/2.5/wind?appid=${apiKey}&lat=${lat}&lon=${lon}`;
      // api URL for 5 day forecast //
-     var queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+     var queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
 
      // fetch request for UV index //
@@ -94,13 +94,13 @@ searchBtn.onclick = function getCity() {
                .text(moment.unix(data.list[i].dt).format("l"));
              var temp = $("<p>")
                .addClass("temp")
-               .text("temp: " + data.list[i].main.temp);
+               .text("temp: " + data.list[i].main.temp + " °C" );
              var humidity = $("<p>")
                .addClass("humidity")
                .text("humidity: " + data.list[i].main.humidity + " %");
              var wind = $("<p>")
                .addClass("wind")
-               .text("wind speed: " + data.list[i].wind.speed + " mph");
+               .text("wind speed: " + data.list[i].wind.speed + " KPH");
              var icon = $("<img>").attr(
                "src",
                "http://openweathermap.org/img/w/" +
