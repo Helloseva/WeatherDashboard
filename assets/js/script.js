@@ -69,3 +69,48 @@ searchBtn.onclick = function getCity() {
      var queryURL2 = `http://api.openweathermap.org/data/2.5/wind?appid=${apiKey}&lat=${lat}&lon=${lon}`;
      // api URL for 5 day forecast //
      var queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+
+
+     // fetch request for UV index //
+     return fetch(queryURL2)
+     .then((response) => response.json())
+     .then((data) => {
+       console.log(data);
+       // sets uv index into html//
+       var span = document.getElementById("wind");
+       span.textContent = data.value;
+
+       // fetch request for 5 day forecast
+       return fetch(queryURL3)
+         .then((response) => response.json())
+         .then((data) => {
+           // console.log(data);
+           $("#5DayForecast").empty();
+           for (var i = 4; i < data.list.length; i += 8) {
+             console.log(data.list[i]);
+             var forecastCard = $("<div>").addClass("col card future");
+             var date = $("<p>")
+               .addClass("date")
+               .text(moment.unix(data.list[i].dt).format("l"));
+             var temp = $("<p>")
+               .addClass("temp")
+               .text("temp: " + data.list[i].main.temp);
+             var humidity = $("<p>")
+               .addClass("humidity")
+               .text("humidity: " + data.list[i].main.humidity + " %");
+             var wind = $("<p>")
+               .addClass("wind")
+               .text("wind speed: " + data.list[i].wind.speed + " mph");
+             var icon = $("<img>").attr(
+               "src",
+               "http://openweathermap.org/img/w/" +
+                 data.list[i].weather[0].icon +
+                 ".png"
+             );
+             forecastCard.append(date, icon, temp, humidity, wind);
+             $("#5DayForecast").append(forecastCard);
+           }
+         });
+     });
+ });
+};
