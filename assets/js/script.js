@@ -25,3 +25,17 @@ $("#btn-clear").on("click", function () {
   $(".history").empty();
   localStorage.clear();
 });
+
+
+// click function to grab city entered in input box, search it in apiURL, and show hidden boxes//
+searchBtn.onclick = function getCity() {
+  forecast.className = "show";
+  windIndex.className = "show";
+  // creates the value for city to use in api url //
+  city = document.getElementById("search-city").value.trim();
+  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`;
+  // using moment to show current date in top column and next 5 dates in each forecast card //
+  document.getElementById("city-date").innerHTML = moment().format("L");
+  makeButtons(city);
+  historyArray.push(city);
+  localStorage.setItem("history", JSON.stringify(historyArray));
