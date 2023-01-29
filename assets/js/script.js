@@ -39,3 +39,10 @@ searchBtn.onclick = function getCity() {
   makeButtons(city);
   historyArray.push(city);
   localStorage.setItem("history", JSON.stringify(historyArray));
+
+   // first api fetch request //
+   fetch(queryURL)
+   .then((response) => response.json())
+   .then((data) => {
+     console.log(data);
+     var weather = data;
