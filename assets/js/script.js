@@ -46,3 +46,26 @@ searchBtn.onclick = function getCity() {
    .then((data) => {
      console.log(data);
      var weather = data;
+
+     // inserts current weather info into html for top column //
+     document.getElementById("city-name").innerHTML = weather.name;
+     document.getElementById("temp").innerHTML =
+       "Temperature: " + weather.main.temp;
+     document.getElementById("humidity").innerHTML =
+       "Humidity: " + weather.main.humidity;
+     document.getElementById("wind").innerHTML =
+       "Wind Speed: " + weather.wind.speed;
+     $("#icon1").empty();
+     var icon1 = $("<img>").attr(
+       "src",
+       "http://openweathermap.org/img/w/" + weather.weather[0].icon + ".png"
+     );
+     $("#icon1").append(icon1);
+
+     // sets variables to use in next 2 api URLs //
+     var lat = weather.coord.lat;
+     var lon = weather.coord.lon;
+     // api url for UV index //
+     var queryURL2 = `http://api.openweathermap.org/data/2.5/wind?appid=${apiKey}&lat=${lat}&lon=${lon}`;
+     // api URL for 5 day forecast //
+     var queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
