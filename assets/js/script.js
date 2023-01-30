@@ -88,7 +88,7 @@ searchBtn.onclick = function getCity() {
               $("#5DayForecast").empty();
               for (var i = 4; i < data.list.length; i += 8) {
                 console.log(data.list[i]);
-                var forecastCard = $("<div>").addClass("col card future");
+                var forecastCard = $("<div>").addClass("forecast-cards");
                 var date = $("<p>")
                   .addClass("date")
                   .text(moment.unix(data.list[i].dt).format("l"));
