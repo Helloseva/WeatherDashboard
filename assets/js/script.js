@@ -33,7 +33,8 @@ searchBtn.onclick = function getCity() {
   windIndex.className = "show";
   // creates the value for city to use in query url //
   city = document.getElementById("search-city").value.trim();
-  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  // var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey;
   // using moment to show current date in top column and next 5 dates in each forecast card //
   document.getElementById("city-date").innerHTML = moment().format("L");
   makeButtons(city);
@@ -66,12 +67,13 @@ searchBtn.onclick = function getCity() {
       var lat = weather.coord.lat;
       var lon = weather.coord.lon;
       // api url for Wind index //
-      var queryURL2 = `http://api.openweathermap.org/data/2.5/wind?appid=${apiKey}&lat=${lat}&lon=${lon}`;
+      // var queryURL2 = `http://api.openweathermap.org/data/2.5/wind?appid=${apiKey}&lat=${lat}&lon=${lon}`;
+      var queryURL2 = "https://api.openweathermap.org/data/2.5/wind/forecast?lat=" + lat + "&lon=" + lon + "&appid=" + apiKey + "&cnt=1";
       // api URL for 5 day forecast //
       var queryURL3 = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
 
 
-      // fetch request for Wind index //
+      // fetch request for Wind  //
       return fetch(queryURL2)
         .then((response) => response.json())
         .then((data) => {
