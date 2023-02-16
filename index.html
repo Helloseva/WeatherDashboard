@@ -7,70 +7,70 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link rel="stylesheet" href="./assets/css/styles.css"/>
+  <link rel="stylesheet" href="./assets/css/styles.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <title>Weather Dashboard</title>
 </head>
+
 <body>
-<header class="container-fluid text-center text-white bg-dark p-2 weather-header">Weather Dashboard</header>
+  <header>Weather Dashboard</header>
+  <!-- contains both major columns -->
+  <div class="container">
+    <div class="row">
+      <!-- makes sure both columns are in a row -->
 
-<div class="container">
-  <div class="row">
-
-    <!-- search bar -->
-    <div class="col-3 m-3 search-box">
-      <h2>Search for a City</h2>
-
-      <div class="formInput row ml-3" id="formInput">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Enter a city" id="search-city" />
-          <div class="input-group-append">
-            <button type="button" class="btn btn-outline-secondary" id="btn-search" aria-label="submit search">
-              Search
-            </button>
+      <!-- left column for search bar and history -->
+      <div class="col-3 m-3 search-box">
+        <p class="search">Search for a City:</p>
+        <!-- form and button -->
+        <div class="formInput row ml-3" id="formInput">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Enter a city" id="search-city" />
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="btn-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+          <!-- clear button  -->
+          <button type="button" class="btn btn-primary btn-md border-1" id="btn-clear">
+            Clear History
+          </button>
+        </div>
+        <!-- search history -->
+        <div class="list-group history"></div>
+      </div>
+      <!-- right column for target city info -->
+      <div class="col-8">
+        <div class="row m-3" id="targetCity">
+          <!-- column that take up entire space of above div, to hold name & date -->
+          <div class="col-12">
+            <h2 id="city-name"></h2>
+            <h2 id="city-date"></h2>
+            <div id="icon1"></div>
+          </div>
+          <!-- column underneath city name and date to show weather info -->
+          <div class="weather-info">
+            <p id="temp"></p>
+            <p id="humidity"></p>
+            <p id="wind"></p>
+            <p id="uvIndex" class="hide">UV Index: <span id="uv"></span></p>
           </div>
         </div>
-        <!-- clear button  -->
-        <button type="button" class="btn btn-primary btn-md border-1" id="btn-clear">
-          Clear History
-        </button>
-      </div>
-      <!-- search history -->
-      <div class="list-group history"></div>
-    </div>
-    <!-- Weather dashboard with all the related weather information -->
-    <div class="col-8">
-      <div class="row m-3" id="forecastCity">
-        <!-- column that take up entire space of above div, to hold name & date -->
-        <div class="col-12">
-          <h2 id="city-name"></h2>
-          <h2 id="city-date"></h2>
-          <div id="icon1"></div>
+        <!-- start of 5 day forecast -->
+        <div class="row" id="forecast">
+          <h2 class="col-12">5 Day Forecast</h2>
         </div>
-        <!-- weather info -->
-        <div class="weather-info">
-          <p id="temp"></p>
-          <p id="windIndex" class="hide"><span id="wind"></span></p>
-          <p id="humidity"></p>
+        <div class="container text-center hide" id="forecast-cards">
+          <div class="row align-items-start" id="5DayForecast"></div>
         </div>
-      </div>
-      <!-- 5 day forecast -->
-      <div class="row" id="forecast">
-        <h2 class="col-12">5 Day Forecast</h2>
-      </div>
-      <div class="container text-center hide" id="forecast-cards">
-        <div class="row align-items-start" id="5DayForecast"></div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- Moment.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-<!--jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- JS -->
-<script src="./assets/js/script.js"></script>
+  <script src="https://kit.fontawesome.com/c6386d3a21.js" crossorigin="anonymous"></script>
+  <script src="assets/js/script.js"></script>
 </body>
+<script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
 
 </html>
